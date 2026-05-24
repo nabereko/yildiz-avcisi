@@ -267,23 +267,23 @@ struct ShopItem { name: &'static str, desc: &'static str, cost_base: i64, lv: &'
 const SHOP_ITEMS: [ShopItem; 8] = [
     ShopItem { name: "CAN", desc: "Max HP +1", cost_base: 50, lv: "shop_hp_lv", key: KeyCode::Key1 },
     ShopItem { name: "KALKAN", desc: "Kalkan +0.5", cost_base: 30, lv: "shop_shield_lv", key: KeyCode::Key2 },
-    ShopItem { name: "HIZ", desc: "Hiz +0.3", cost_base: 40, lv: "shop_speed_lv", key: KeyCode::Key3 },
-    ShopItem { name: "SILAH", desc: "Silah Seviye +1", cost_base: 100, lv: "shop_weapon_lv", key: KeyCode::Key4 },
+    ShopItem { name: "HIZ", desc: "Hız +0.3", cost_base: 40, lv: "shop_speed_lv", key: KeyCode::Key3 },
+    ShopItem { name: "SİLAH", desc: "Silah Seviye +1", cost_base: 100, lv: "shop_weapon_lv", key: KeyCode::Key4 },
     ShopItem { name: "DRONE", desc: "Drone +1", cost_base: 150, lv: "shop_drone_lv", key: KeyCode::Key5 },
     ShopItem { name: "HASAR", desc: "Hasar +2", cost_base: 80, lv: "shop_damage_lv", key: KeyCode::Key6 },
-    ShopItem { name: "ATES", desc: "Atis Hizi", cost_base: 120, lv: "shop_firerate_lv", key: KeyCode::Key7 },
-    ShopItem { name: "ENERJI", desc: "Max Enerji +20", cost_base: 60, lv: "shop_energy_lv", key: KeyCode::Key8 },
+    ShopItem { name: "ATEŞ", desc: "Atış Hızı", cost_base: 120, lv: "shop_firerate_lv", key: KeyCode::Key7 },
+    ShopItem { name: "ENERJİ", desc: "Max Enerji +20", cost_base: 60, lv: "shop_energy_lv", key: KeyCode::Key8 },
 ];
 fn shop_cost(base: i64, level: i32) -> i64 { base + (level as i64) * base / 2 }
 const SHOP_ITEMS_PAGE2: [ShopItem; 8] = [
-    ShopItem { name: "HIZ II", desc: "Hiz +0.5", cost_base: 80, lv: "shop_speed2_lv", key: KeyCode::Key1 },
-    ShopItem { name: "ATES II", desc: "Atis Hizi +0.02", cost_base: 180, lv: "shop_firerate2_lv", key: KeyCode::Key2 },
-    ShopItem { name: "CAN REGEN", desc: "Surekli Can +0.02/s", cost_base: 150, lv: "shop_regen_lv", key: KeyCode::Key3 },
+    ShopItem { name: "HIZ II", desc: "Hız +0.5", cost_base: 80, lv: "shop_speed2_lv", key: KeyCode::Key1 },
+    ShopItem { name: "ATEŞ II", desc: "Atış Hızı +0.02", cost_base: 180, lv: "shop_firerate2_lv", key: KeyCode::Key2 },
+    ShopItem { name: "CAN REGEN", desc: "Sürekli Can +0.02/s", cost_base: 150, lv: "shop_regen_lv", key: KeyCode::Key3 },
     ShopItem { name: "DASH", desc: "Dash Bekleme -0.1s", cost_base: 100, lv: "shop_dash_lv", key: KeyCode::Key4 },
     ShopItem { name: "MERMI", desc: "Mermi Boyutu +1", cost_base: 100, lv: "shop_bullet_lv", key: KeyCode::Key5 },
-    ShopItem { name: "KOMBO", desc: "Kombo Suresi +0.5s", cost_base: 80, lv: "shop_combo_lv", key: KeyCode::Key6 },
-    ShopItem { name: "ALTIN", desc: "Oldurme Basina +2 Altin", cost_base: 120, lv: "shop_gold_lv", key: KeyCode::Key7 },
-    ShopItem { name: "ENERJI II", desc: "Energy Regen +2/s", cost_base: 100, lv: "shop_energy_regen_lv", key: KeyCode::Key8 },
+    ShopItem { name: "KOMBO", desc: "Kombo Süresi +0.5s", cost_base: 80, lv: "shop_combo_lv", key: KeyCode::Key6 },
+    ShopItem { name: "ALTIN", desc: "Öldürme Başına +2 Altın", cost_base: 120, lv: "shop_gold_lv", key: KeyCode::Key7 },
+    ShopItem { name: "ENERJİ II", desc: "Energy Regen +2/s", cost_base: 100, lv: "shop_energy_regen_lv", key: KeyCode::Key8 },
 ];
 
 // === MAIN ===
@@ -354,12 +354,12 @@ async fn main() {
                 draw_text(ti, sw/2.0-measure_text(ti,None,64,1.0).width/2.0, sh*0.25, 64.0, Color::new(0.2,0.5,(t*3.0).sin()*0.3+0.7,1.0));
                 let sub = "STAR HUNTER";
                 draw_text(sub, sw/2.0-measure_text(sub,None,28,1.0).width/2.0, sh*0.25+68.0, 28.0, Color::new(0.5,0.8,1.0,0.6));
-                let cmds = ["WASD/OKLAR - HAREKET", "SOL TIK/SPACE - ATES", "1/2/3/4 - SILAH SEC (ENERJI)", "SHIFT/SAG TIK - DASH", "TAB - STATLAR", "MAGAZA ICIN ESC (DALGA ARASI)"];
+                let cmds = ["WASD/OKLAR - HAREKET", "SOL TIK/SPACE - ATEŞ", "1/2/3/4 - SİLAH SEÇ (ENERJİ)", "SHIFT/SAĞ TIK - DASH", "TAB - STATLAR", "MAĞAZA İÇİN ESC (DALGA ARASI)"];
                 for (i,c) in cmds.iter().enumerate() { let cw = measure_text(c,None,17,1.0).width; draw_text(c, sw/2.0-cw/2.0, sh*0.45+i as f32*26.0, 17.0, Color::new(0.5,0.6,0.8,0.8)); }
-                let s = "BASLAMAK ICIN SPACE'E BAS";
+                let s = "BAŞLAMAK İÇİN SPACE'E BAS";
                 let b = if (t*2.0).sin()>0.0{1.0}else{0.2};
                 draw_text(s, sw/2.0-measure_text(s,None,24,1.0).width/2.0, sh*0.75, 24.0, Color::new(1.0,1.0,1.0,b));
-                if highscore > 0 { let hs = format!("EN IYI: {}", highscore); draw_text(&hs, sw/2.0-measure_text(&hs,None,22,1.0).width/2.0, sh*0.85, 22.0, Color::new(0.8,0.7,0.3,0.8)); }
+                if highscore > 0 { let hs = format!("EN İYİ: {}", highscore); draw_text(&hs, sw/2.0-measure_text(&hs,None,22,1.0).width/2.0, sh*0.85, 22.0, Color::new(0.8,0.7,0.3,0.8)); }
                 next_frame().await; continue;
             }
 
@@ -395,7 +395,7 @@ async fn main() {
                 let t = get_time() as f32;
                 clear_background(Color::from_rgba(3,3,15,255));
                 for s in &stars { let b = s.brightness; draw_circle(s.x, s.y, s.size*(0.5+s.layer*0.5), Color::new(b,b*0.9,b,0.7)); }
-                draw_text("ZORLUK SEC", sw/2.0-measure_text("ZORLUK SEC",None,50,1.0).width/2.0, sh*0.3, 50.0, Color::new(0.2,0.5,(t*3.0).sin()*0.3+0.7,1.0));
+                draw_text("ZORLUK SEÇ", sw/2.0-measure_text("ZORLUK SEÇ",None,50,1.0).width/2.0, sh*0.3, 50.0, Color::new(0.2,0.5,(t*3.0).sin()*0.3+0.7,1.0));
                 let opts = ["[1] KOLAY (6 CAN, 2 KALKAN)", "[2] NORMAL (3 CAN, 1 KALKAN)", "[3] ZOR (2 CAN, 0.5 KALKAN)"];
                 for (i, opt) in opts.iter().enumerate() {
                     let col = match (i, t) {
@@ -406,7 +406,7 @@ async fn main() {
                     let b = ((t*2.0+ i as f32).sin()*0.3+0.7) as f32;
                     draw_text(opt, sw/2.0-measure_text(opt,None,22,1.0).width/2.0, sh*0.5+i as f32*40.0, 22.0, Color::new(col.r* b, col.g*b, col.b*b, b));
                 }
-                draw_text("GERI ICIN ESC", sw/2.0-measure_text("GERI ICIN ESC",None,16,1.0).width/2.0, sh*0.85, 16.0, Color::new(0.5,0.5,0.7,0.6));
+                draw_text("GERİ İÇİN ESC", sw/2.0-measure_text("GERİ İÇİN ESC",None,16,1.0).width/2.0, sh*0.85, 16.0, Color::new(0.5,0.5,0.7,0.6));
                 if is_key_pressed(KeyCode::Escape) { state = GameState::Menu; }
                 next_frame().await; continue;
             }
@@ -416,14 +416,14 @@ async fn main() {
                 clear_background(Color::from_rgba(5,5,20,255));
                 for s in &stars { let b=s.brightness; draw_circle(s.x,s.y,s.size*(0.3+s.layer*0.7),Color::new(b,b*0.9,b,0.8)); }
                 let _t = get_time() as f32;
-                draw_text("MAGAZA", sw/2.0-measure_text("MAGAZA",None,50,1.0).width/2.0, 60.0, 50.0, Color::new(0.3,0.8,1.0,1.0));
+                draw_text("MAĞAZA", sw/2.0-measure_text("MAĞAZA",None,50,1.0).width/2.0, 60.0, 50.0, Color::new(0.3,0.8,1.0,1.0));
                 let info = format!("ALTIN: {} | DALGA: {} | SKOR: {}", player.gold, wave-1, player.score);
                 draw_text(&info, sw/2.0-measure_text(&info,None,18,1.0).width/2.0, 90.0, 18.0, Color::new(0.7,0.8,1.0,0.8));
-                let stats = format!("CAN: {}/{} KALKAN: {:.1}/{} HIZ: {} SILAH: LV{} DRONE: {} HASAR: +{} ENERJI: {:.0}/{}",
+                let stats = format!("CAN: {}/{} KALKAN: {:.1}/{} HIZ: {} SİLAH: LV{} DRONE: {} HASAR: +{} ENERJİ: {:.0}/{}",
                     player.hp, player.max_hp, player.shield, player.max_shield,
                     player.speed, player.weapon_level, player.drones, player.damage_bonus, player.energy, player.max_energy);
                 draw_text(&stats, sw/2.0-measure_text(&stats,None,13,1.0).width/2.0, 115.0, 13.0, Color::new(0.6,0.7,0.8,0.7));
-                draw_text("Cikmak icin ESC", sw/2.0-measure_text("Cikmak icin ESC",None,14,1.0).width/2.0, 145.0, 14.0, Color::new(0.5,0.5,0.7,0.6));
+                draw_text("Çıkmak için ESC", sw/2.0-measure_text("Çıkmak için ESC",None,14,1.0).width/2.0, 145.0, 14.0, Color::new(0.5,0.5,0.7,0.6));
                 // Page switching
                 if is_key_pressed(KeyCode::Q) { shop_page = 0; }
                 if is_key_pressed(KeyCode::E) { shop_page = 1; }
@@ -431,8 +431,8 @@ async fn main() {
                 let page_key = format!("SAYFA: [Q]{} [E]{}", if shop_page==0{"*"}else{" "}, if shop_page==1{"*"}else{" "});
                 draw_text(&page_key, sw/2.0+100.0, 145.0, 14.0, Color::new(0.5,0.7,1.0,0.7));
                 let (items, item_names, item_vals, item_max) = if shop_page==0 {
-                    let names = ["[1] CAN +1", "[2] KALKAN +0.5", "[3] HIZ +0.3", "[4] SILAH SEVIYE",
-                        "[5] DRONE +1", "[6] HASAR +2", "[7] ATIS HIZI", "[8] ENERJI +20"];
+                    let names = ["[1] CAN +1", "[2] KALKAN +0.5", "[3] HIZ +0.3", "[4] SİLAH SEVİYE",
+                        "[5] DRONE +1", "[6] HASAR +2", "[7] ATIS HIZI", "[8] ENERJİ +20"];
                     let vals = [
                         player.shop_hp_lv, player.shop_shield_lv, player.shop_speed_lv,
                         player.shop_weapon_lv, player.shop_drone_lv, player.shop_damage_lv,
@@ -442,7 +442,7 @@ async fn main() {
                     (&SHOP_ITEMS[..], names, vals, max)
                 } else {
                     let names = ["[1] HIZ +0.5", "[2] ATIS HIZI +0.02", "[3] CAN REGEN", "[4] DASH CD -0.1s",
-                        "[5] MERMI BOYUT +1", "[6] KOMBO +0.5s", "[7] ALTIN BONUS", "[8] ENERJI REGEN +2/s"];
+                        "[5] MERMI BOYUT +1", "[6] KOMBO +0.5s", "[7] ALTIN BONUS", "[8] ENERJİ REGEN +2/s"];
                     let vals = [
                         player.shop_speed2_lv, player.shop_firerate2_lv, player.shop_regen_lv,
                         player.shop_dash_lv, player.shop_bullet_lv, player.shop_combo_lv,
@@ -523,7 +523,7 @@ async fn main() {
             GameState::Paused => {
                 clear_background(Color::from_rgba(3,3,15,200));
                 draw_text("DURAKLATILDI", sw/2.0-measure_text("DURAKLATILDI",None,50,1.0).width/2.0, sh/2.0-30.0, 50.0, Color::new(1.0,1.0,1.0,0.9));
-                draw_text("DEVAM ICIN ESC", sw/2.0-measure_text("DEVAM ICIN ESC",None,22,1.0).width/2.0, sh/2.0+20.0, 22.0, Color::new(0.6,0.8,1.0,0.7));
+                draw_text("DEVAM İÇİN ESC", sw/2.0-measure_text("DEVAM İÇİN ESC",None,22,1.0).width/2.0, sh/2.0+20.0, 22.0, Color::new(0.6,0.8,1.0,0.7));
                 if is_key_pressed(KeyCode::Escape) { state = GameState::Playing; }
                 next_frame().await; continue;
             }
@@ -538,16 +538,16 @@ async fn main() {
                 clear_background(Color::from_rgba(3,3,12,255));
                 for s in &stars { let b=s.brightness; draw_circle(s.x,s.y,s.size,Color::new(b,b*0.9,b,0.8)); }
                 for p in &particles { let a=(p.life/p.max_life).max(0.0); draw_circle(p.x,p.y,p.size*a,Color::new(p.color.r,p.color.g,p.color.b,a)); }
-                draw_text("OYUN BITTI", sw/2.0-measure_text("OYUN BITTI",None,60,1.0).width/2.0, sh*0.2, 60.0, Color::new(1.0,0.2,0.2,1.0));
-                let st = format!("SKOR: {}  DALGA: {}  OLDURME: {}", player.score, wave-1, player.kills);
+                draw_text("OYUN BİTTİ", sw/2.0-measure_text("OYUN BİTTİ",None,60,1.0).width/2.0, sh*0.2, 60.0, Color::new(1.0,0.2,0.2,1.0));
+                let st = format!("SKOR: {}  DALGA: {}  ÖLDÜRME: {}", player.score, wave-1, player.kills);
                 draw_text(&st, sw/2.0-measure_text(&st,None,24,1.0).width/2.0, sh*0.32, 24.0, Color::new(1.0,1.0,1.0,0.9));
                 let gt = format!("KALAN ALTIN: {}", player.gold);
                 draw_text(&gt, sw/2.0-measure_text(&gt,None,20,1.0).width/2.0, sh*0.40, 20.0, Color::new(1.0,0.8,0.3,0.8));
                 if player.score==highscore && player.score>0 {
-                    let nr="YENI REKOR!"; let b=(t*3.0).sin()*0.3+0.7;
+                    let nr="YENİ REKOR!"; let b=(t*3.0).sin()*0.3+0.7;
                     draw_text(nr, sw/2.0-measure_text(nr,None,32,1.0).width/2.0, sh*0.50, 32.0, Color::new(1.0,0.8,0.2,b));
-                } else { let hs=format!("EN IYI: {}", highscore); draw_text(&hs, sw/2.0-measure_text(&hs,None,24,1.0).width/2.0, sh*0.50, 24.0, Color::new(0.8,0.7,0.3,0.8)); }
-                let r="TEKRAR ICIN SPACE'E BAS";
+                } else { let hs=format!("EN İYİ: {}", highscore); draw_text(&hs, sw/2.0-measure_text(&hs,None,24,1.0).width/2.0, sh*0.50, 24.0, Color::new(0.8,0.7,0.3,0.8)); }
+                let r="TEKRAR İÇİN SPACE'E BAS";
                 let b=if (t*2.0).sin()>0.0{1.0}else{0.3};
                 draw_text(r, sw/2.0-measure_text(r,None,20,1.0).width/2.0, sh*0.65, 20.0, Color::new(1.0,1.0,1.0,b));
                 next_frame().await; continue;
@@ -705,7 +705,7 @@ async fn main() {
                             }, kind: bkind, pattern: rng.gen_range(0..4), phase: 0,
                             hit_flash: 0.0, moving_in: true, bullet_cooldown: 0.0,
                         });
-                        floating.push(FloatingText { x: sw/2.0, y: sh*0.3, text: "BOSS GELIYOR!".to_string(), life: 3.0, color: Color::new(1.0,0.2,0.1,1.0), size: 40.0 });
+                        floating.push(FloatingText { x: sw/2.0, y: sh*0.3, text: "BOSS GELİYOR!".to_string(), life: 3.0, color: Color::new(1.0,0.2,0.1,1.0), size: 40.0 });
                     }
                     wave += 1;
                     let rest = wave % 3 == 1 && wave > 2;
@@ -979,7 +979,7 @@ async fn main() {
                                 player.score += pts;
                                 player.gold += 15i64 + ::rand::thread_rng().gen_range(0i64..11) + boss_killed as i64*5 + player.shop_gold_lv as i64*2;
                                 boss_killed += 1;
-                                floating.push(FloatingText { x: sw/2.0, y: sh*0.3, text: format!("BOSS YOK EDILDI! +{}", pts), life: 3.0, color: Color::new(1.0,0.9,0.2,1.0), size: 36.0 });
+                                floating.push(FloatingText { x: sw/2.0, y: sh*0.3, text: format!("BOSS YOK EDİLDİ! +{}", pts), life: 3.0, color: Color::new(1.0,0.9,0.2,1.0), size: 36.0 });
                                 particles.extend(explode(b.x,b.y,Color::new(1.0,0.3,0.1,1.0),Color::new(1.0,0.8,0.2,1.0),Color::new(1.0,1.0,0.5,1.0),80));
                                 shake = 20.0; flash = 0.8;
                                 for _ in 0..8 { let mut rng = ::rand::thread_rng();
@@ -1057,7 +1057,7 @@ async fn main() {
                     if (player.x-p.x).hypot(player.y-p.y) < PLAYER_SIZE+14.0 {
                         match p.kind { 0 => player.hp = (player.hp+1).min(player.max_hp), 1 => player.shield = (player.shield+1.0).min(player.max_shield), 2 => player.speed += 0.5,
                             3 => player.weapon_level = (player.weapon_level+1).min(5), 4 => player.drones = (player.drones+1).min(5), 5 => player.score += 200, 6 => { player.max_hp += 1; player.hp = (player.hp+1).min(player.max_hp); }, _ => player.fire_rate_bonus += 0.02 }
-                        let txt = match p.kind { 0=>"+HP", 1=>"KALKAN", 2=>"HIZ", 3=>"SILAH", 4=>"DRONE", 5=>"+200", 6=>"+MAX HP", _=>"ATES HIZI" };
+                        let txt = match p.kind { 0=>"+HP", 1=>"KALKAN", 2=>"HIZ", 3=>"SİLAH", 4=>"DRONE", 5=>"+200", 6=>"+MAX HP", _=>"ATEŞ HIZI" };
                         floating.push(FloatingText { x: p.x, y: p.y, text: txt.to_string(), life: 1.0, color: Color::new(0.3,1.0,0.3,1.0), size: 16.0 });
                         particles.extend(mkparticles(p.x,p.y,Color::new(0.3,1.0,0.3,1.0),12,100.0,0.0));
                     } else if p.y < sh+30.0 { alive_pu.push(p); }
@@ -1086,7 +1086,7 @@ async fn main() {
                     let (cr,cg,cb) = match p.kind { 0=>(0.2,g,0.2),1=>(g*0.3,g*0.5,1.0),2=>(g,g,0.2),3=>(g,0.3,0.8),4=>(0.3,g,g),5=>(g,0.7,0.3),6=>(g,0.3,0.3),_=>(1.0,g*0.5,0.0) };
                     draw_circle(p.x+sx, p.y+sy, 10.0, Color::new(cr,cg,cb,1.0));
                     draw_circle(p.x+sx, p.y+sy, 6.0, Color::new(1.0,1.0,1.0,0.4));
-                    let lbl = match p.kind { 0=>"+HP",1=>"KALKAN",2=>"HIZ",3=>"SILAH",4=>"DRONE",5=>"+200",6=>"+CAN",_=>"+ATES" };
+                    let lbl = match p.kind { 0=>"+HP",1=>"KALKAN",2=>"HIZ",3=>"SİLAH",4=>"DRONE",5=>"+200",6=>"+CAN",_=>"+ATEŞ" };
                     let lw = measure_text(lbl,None,11,1.0).width; draw_text(lbl, p.x+sx-lw/2.0, p.y+sy-12.0, 11.0, Color::new(1.0,1.0,1.0,0.7));
                 }
 
@@ -1165,7 +1165,7 @@ async fn main() {
                 for p in &particles { let a=(p.life/p.max_life).max(0.0); if p.glow>0.5{draw_circle(p.x+sx,p.y+sy,p.size*a*3.0,Color::new(p.color.r,p.color.g,p.color.b,a*0.3));} draw_circle(p.x+sx,p.y+sy,p.size*a,Color::new(p.color.r,p.color.g,p.color.b,a)); }
                 for ft in &floating { let a=(ft.life/1.5).max(0.0); let w=measure_text(&ft.text,None,ft.size as u16,1.0).width; draw_text(&ft.text, ft.x+sx-w/2.0, ft.y+sy, ft.size, Color::new(ft.color.r,ft.color.g,ft.color.b,a)); }
 
-                if wave_announce > 0.0 { wave_announce -= dt; let a=(wave_announce/2.0).min(1.0); let txt=format!("DALGA {} ({} DUSMAN)", wave-1, enemies.len()+asteroids.len()); draw_text(&txt, sw/2.0-measure_text(&txt,None,32,1.0).width/2.0, sh*0.5, 32.0, Color::new(1.0,0.8,0.2,a)); }
+                if wave_announce > 0.0 { wave_announce -= dt; let a=(wave_announce/2.0).min(1.0); let txt=format!("DALGA {} ({} DÜŞMAN)", wave-1, enemies.len()+asteroids.len()); draw_text(&txt, sw/2.0-measure_text(&txt,None,32,1.0).width/2.0, sh*0.5, 32.0, Color::new(1.0,0.8,0.2,a)); }
 
                 // HUD
                 let hp_s: String = (0..player.hp).map(|_| "\u{2764}").collect();
@@ -1174,14 +1174,14 @@ async fn main() {
                 let ep = player.energy/player.max_energy; draw_rectangle(15.0,41.5,70.0,3.5,Color::new(0.3,0.2,0.3,0.5)); draw_rectangle(15.0,41.5,70.0*ep,3.5,Color::new(0.8,0.3,0.8,0.8));
                 draw_text(&format!("SKOR: {}", player.score), 15.0, 68.0, 16.0, Color::new(0.8,0.8,1.0,0.9));
                 draw_text(&format!("DALGA: {}", wave-1), 15.0, 86.0, 14.0, Color::new(0.6,0.8,1.0,0.7));
-                draw_text(&format!("OLDURME: {}", player.kills), 15.0, 102.0, 12.0, Color::new(0.6,0.6,0.8,0.6));
+                draw_text(&format!("ÖLDÜRME: {}", player.kills), 15.0, 102.0, 12.0, Color::new(0.6,0.6,0.8,0.6));
                 draw_text(&format!("ALTIN: {}", player.gold), 15.0, 116.0, 13.0, Color::new(1.0,0.8,0.3,0.9));
                 let dname = match diff_mode { DiffMode::Easy => "KOLAY", DiffMode::Normal => "NORMAL", DiffMode::Hard => "ZOR" };
                 draw_text(dname, sw-measure_text(dname,None,14,1.0).width-10.0, 28.0, 14.0, match diff_mode { DiffMode::Easy => Color::new(0.3,1.0,0.3,0.8), DiffMode::Normal => Color::new(1.0,0.8,0.3,0.8), DiffMode::Hard => Color::new(1.0,0.3,0.3,0.8) });
 
                 if boss.is_none() && enemies.is_empty() && asteroids.len() < 4 && wave_timer > 2.0 {
                     let t = get_time() as f32; let ba = (t*2.0).sin()*0.3+0.7;
-                    draw_text("[MAGAZA ICIN ESC]", sw/2.0-measure_text("[MAGAZA ICIN ESC]",None,20,1.0).width/2.0, sh-50.0, 20.0, Color::new(0.3,0.8,1.0,ba));
+                    draw_text("[MAĞAZA İÇİN ESC]", sw/2.0-measure_text("[MAĞAZA İÇİN ESC]",None,20,1.0).width/2.0, sh-50.0, 20.0, Color::new(0.3,0.8,1.0,ba));
                 }
 
                 if player.combo >= 3 {
@@ -1189,11 +1189,11 @@ async fn main() {
                     draw_text(&format!("COMBO x{}!", player.combo), 15.0, 134.0, 16.0, cc);
                 }
 
-                let wt = format!("{} [{:02}E]", match player.weapon { WeaponType::Normal=>"NORMAL", WeaponType::Spread=>"SACMA", WeaponType::Homing=>"GUDUMLU", WeaponType::Laser=>"LAZER" }, player.energy as i32);
+                let wt = format!("{} [{:02}E]", match player.weapon { WeaponType::Normal=>"NORMAL", WeaponType::Spread=>"SAÇMA", WeaponType::Homing=>"GÜDÜMLÜ", WeaponType::Laser=>"LAZER" }, player.energy as i32);
                 let wc = match player.weapon { WeaponType::Normal=>Color::new(0.6,0.8,1.0,0.8), WeaponType::Spread=>Color::new(0.3,1.0,0.5,0.8), WeaponType::Homing=>Color::new(1.0,0.5,0.8,0.8), WeaponType::Laser=>Color::new(1.0,0.2,0.1,0.8) };
                 draw_text(&wt, 15.0, sh-20.0, 14.0, wc);
                 if player.drones > 0 { draw_text(&format!("DRONE: {}/{}", drones.len(), player.drones), 15.0, sh-38.0, 12.0, Color::new(0.3,0.7,1.0,0.7)); }
-                draw_text("1:NORMAL 2:SACMA 3:GUDUMLU 4:LAZER", sw-measure_text("1:NORMAL 2:SACMA 3:GUDUMLU 4:LAZER",None,11,1.0).width-10.0, sh-15.0, 11.0, Color::new(0.4,0.4,0.6,0.6));
+                draw_text("1:NORMAL 2:SAÇMA 3:GÜDÜMLÜ 4:LAZER", sw-measure_text("1:NORMAL 2:SAÇMA 3:GÜDÜMLÜ 4:LAZER",None,11,1.0).width-10.0, sh-15.0, 11.0, Color::new(0.4,0.4,0.6,0.6));
 
                 // Stats panel (Tab key)
                 if is_key_down(KeyCode::Tab) {
@@ -1204,17 +1204,17 @@ async fn main() {
                     let stats_lines = [
                         format!("CAN: {}/{}", player.hp, player.max_hp),
                         format!("KALKAN: {:.1}/{}", player.shield, player.max_shield),
-                        format!("ENERJI: {:.0}/{}", player.energy, player.max_energy),
+                        format!("ENERJİ: {:.0}/{}", player.energy, player.max_energy),
                         format!("HIZ: {:.1}", player.speed),
-                        format!("SILAH LV: {} [HASAR +{}]", player.weapon_level, player.damage_bonus),
-                        format!("ATES HIZI BONUS: +{:.1}%", player.fire_rate_bonus*100.0),
+                        format!("SİLAH LV: {} [HASAR +{}]", player.weapon_level, player.damage_bonus),
+                        format!("ATEŞ HIZI BONUS: +{:.1}%", player.fire_rate_bonus*100.0),
                         format!("DRONE: {}/{}", drones.len(), player.drones),
                         format!("ALTIN: {} | SKOR: {}", player.gold, player.score),
-                        format!("OLDURME: {} | DALGA: {}", player.kills, wave-1),
+                        format!("ÖLDÜRME: {} | DALGA: {}", player.kills, wave-1),
                         format!("KOMBO: x{}", player.combo),
                         format!("CAN REGEN: +{:.2}/s | DASH CD: {:.2}s", player.hp_regen, (1.0-player.dash_reduction).max(0.3)),
                         format!("MERMI BOYUT: +{:.0} | KOMBO: +{:.1}s", player.bullet_size, player.combo_bonus),
-                        format!("ALTIN BONUS: +{}/kill | ENERJI REGEN: +{:.0}/s", player.shop_gold_lv, player.shop_energy_regen_lv as f32*2.0),
+                        format!("ALTIN BONUS: +{}/kill | ENERJİ REGEN: +{:.0}/s", player.shop_gold_lv, player.shop_energy_regen_lv as f32*2.0),
                     ];
                     for (i, line) in stats_lines.iter().enumerate() {
                         draw_text(line, bx+15.0, by+50.0+i as f32*21.0, 15.0, Color::new(0.7,0.8,1.0,0.9));
